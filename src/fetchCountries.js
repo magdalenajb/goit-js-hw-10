@@ -1,8 +1,12 @@
-import { input } from "./index";
+const fetchCountries = name => {
+    return fetch(
+        `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`)
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error(resp.status);
+            }
+            return resp.json();
+        });
+};
 
-export const fetchCountries = (nam) => {
-    nam = `${input.value}`.trim();
-    const countries = fetch('https://restcountries.com/v3.1/name/' + `${name}` + '?fields=name,capital,population,flags,languages');
-    return countries;
-
-}
+export { fetchCountries };
